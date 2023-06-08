@@ -1,11 +1,13 @@
 #include "ComplementsManager.h"
 #include "World.h"
+#include "GameStatus.h"
 #include "Player.h"
 #include <algorithm>
 
-ComplementsManager::ComplementsManager(World* world, Player* player)
+ComplementsManager::ComplementsManager(World* world, GameStatus* game_status, Player* player)
 	:
 	world_(world),
+	game_status_(game_status),
 	player_(player),
 	spawn_rate_(2.5f),
 	time_since_last_spawn_(0.0f),
@@ -17,7 +19,7 @@ ComplementsManager::ComplementsManager(World* world, Player* player)
 	rnd_gen_.seed(rd());
 }
 
-int ComplementsManager::UpdateComplementsLifetime(float dt)
+void ComplementsManager::UpdateComplementsLifetime(float dt)
 {
 	time_since_last_spawn_ += dt;
 
@@ -50,11 +52,21 @@ int ComplementsManager::UpdateComplementsLifetime(float dt)
 			if (complement.loc_ == player_->GetLocation())
 			{
 				complement.dirty_ = true;
-				points = (complement.number_ + player_->GetNumber() == 10) ? complement.number_ : 0;
+
+				if (complement.number_ + player_->GetNumber() == 10)
+				{
+					game_status_->AddToScore(complement.number_);
+				}
+				else
+				{
+					game_status_->PlayerLifesMinusOne();
+				}
+				
 			}
 			else if (complement.loc_.y >= extent.y - 1)
 			{
 				complement.dirty_ = true;
+				game_status_->AddToScoreLost(complement.number_);
 			}
 			else
 			{
@@ -67,6 +79,4 @@ int ComplementsManager::UpdateComplementsLifetime(float dt)
 
 	auto new_end = std::remove_if(complements.begin(), complements.end(), [](const Complement& c) { return c.dirty_; });
 	complements.erase(new_end, complements.end());
-
-	return points;
 }

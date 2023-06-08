@@ -5,14 +5,15 @@
 #include <random>
 
 class World;
+class GameStatus;
 class Player;
 
 class ComplementsManager
 {
 public:
-	ComplementsManager(World* world, Player* player);
+	ComplementsManager(World* world, GameStatus* game_status, Player* player);
 
-	int UpdateComplementsLifetime(float dt);
+	void UpdateComplementsLifetime(float dt);
 
 private:
 	struct Complement
@@ -26,6 +27,7 @@ private:
 
 private:
 	World* world_;
+	GameStatus* game_status_;
 	Player* player_;
 	std::vector<Complement> complements;
 	float spawn_rate_;

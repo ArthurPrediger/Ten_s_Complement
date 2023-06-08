@@ -3,6 +3,7 @@
 #include <memory>
 
 class World;
+class GameStatus;
 class Player;
 class ComplementsManager;
 class ScoreCounter;
@@ -13,11 +14,12 @@ public:
 	GameLoop();
 	~GameLoop();
 
+	void Start();
 	void Run();
 
 private:
 	std::unique_ptr<World> world_;
+	std::unique_ptr<GameStatus> game_status_;
 	std::unique_ptr<Player> player_;
 	std::unique_ptr<ComplementsManager> comps_manager_;
-	std::unique_ptr<ScoreCounter> score_counter_;
 };

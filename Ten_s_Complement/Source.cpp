@@ -4,7 +4,7 @@ int main()
 {
 	GameLoop GL;
 
-	GL.Run();
+	GL.Start();
 
 	return 0;
 }

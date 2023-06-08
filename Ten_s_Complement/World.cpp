@@ -1,5 +1,6 @@
 #include "World.h"
 #include <iostream>
+#include <format>
 
 World::World(Location2D extent)
 	:
@@ -23,6 +24,6 @@ void World::Draw() const
 {
 	for (int y = 0; y < extent_.y * extent_.x; y += extent_.x)
 	{
-		std::cout << content_.substr(y, size_t(extent_.x)) << std::endl;
+		std::cout << std::format("    {}\n", content_.substr(y, size_t(extent_.x)));
 	}
 }

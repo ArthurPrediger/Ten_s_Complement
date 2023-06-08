@@ -134,7 +134,7 @@
     <ClCompile Include="ComplementsManager.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="ScoreCounter.cpp" />
+    <ClCompile Include="GameStatus.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="World.cpp" />
@@ -144,7 +144,7 @@
     <ClInclude Include="Location2D.h" />
     <ClInclude Include="ComplementsManager.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="ScoreCounter.h" />
+    <ClInclude Include="GameStatus.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WinInclude.h" />
     <ClInclude Include="World.h" />
